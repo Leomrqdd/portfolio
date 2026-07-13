@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  // Project page served from https://leomrqdd.github.io/portfolio/
-  base: '/portfolio/',
+  // Served at the root of the custom domain lrmqd.xyz
+  base: '/',
   plugins: [react(), tailwindcss()],
 })
