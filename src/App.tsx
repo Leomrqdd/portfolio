@@ -1,4 +1,4 @@
-import { profile, now, work, socials, KEVRED_URL, type RichText } from './data'
+import { profile, now, availability, work, background, socials, KEVRED_URL, type RichText } from './data'
 import { Section } from './components/Section'
 
 const linkClass =
@@ -24,37 +24,44 @@ function App() {
       <header className="reveal mb-16">
         <Avatar />
         <h1 className="mt-6 text-base font-medium text-ink">Léo</h1>
-        <p className="mt-1.5 font-pixel text-[11px] leading-relaxed text-muted">
+        <p className="mt-1.5 font-pixel text-sm leading-relaxed text-muted">
           {profile.role}
         </p>
         <div className="mt-5 max-w-prose space-y-4 text-ink/90">
           <p>
-            Hey, I'm Léo. I went from managing technical projects at a small
-            French VR startup to co-founding{' '}
+            Hey, I'm Léo. I co-founded{' '}
             <a href={KEVRED_URL} target="_blank" rel="noreferrer" className={linkClass}>
               Kevred
             </a>
-            , where I work as a software engineer.
-          </p>
-          <p>
-            Currently building infrastructure and open-source projects around
-            blockchain and Solana.
+            , where I build Solana infrastructure and software.
           </p>
         </div>
       </header>
 
       <div className="space-y-12">
         <Section title="Now" delay={80}>
-          <ul className="space-y-2">
-            {now.map((item) => (
-              <li
-                key={typeof item === 'string' ? item : item.link.label}
-                className="text-ink/90"
-              >
-                <Rich value={item} />
-              </li>
-            ))}
-          </ul>
+          <div className="space-y-6">
+            <ul className="space-y-2">
+              {now.map((item) => (
+                <li
+                  key={typeof item === 'string' ? item : item.link.label}
+                  className="text-ink/90"
+                >
+                  <Rich value={item} />
+                </li>
+              ))}
+            </ul>
+            <ul className="space-y-2">
+              {availability.map((item) => (
+                <li
+                  key={typeof item === 'string' ? item : item.link.label}
+                  className="text-ink/90"
+                >
+                  <Rich value={item} />
+                </li>
+              ))}
+            </ul>
+          </div>
         </Section>
 
         <Section title="Work" delay={160}>
@@ -95,7 +102,20 @@ function App() {
           </ul>
         </Section>
 
-        <Section title="Connect" delay={240}>
+        <Section title="Background" delay={240}>
+          <ul className="space-y-2">
+            {background.map((item) => (
+              <li
+                key={typeof item === 'string' ? item : item.link.label}
+                className="text-ink/90"
+              >
+                <Rich value={item} />
+              </li>
+            ))}
+          </ul>
+        </Section>
+
+        <Section title="Connect" delay={300}>
           <ul className="space-y-1.5">
             {socials.map((s) => (
               <li key={s.label} className="flex gap-4">
@@ -116,7 +136,7 @@ function App() {
 
       <footer
         className="reveal mt-24 border-t border-line pt-6 font-pixel text-[10px] uppercase tracking-wide text-muted"
-        style={{ animationDelay: '320ms' }}
+        style={{ animationDelay: '360ms' }}
       >
         © {new Date().getFullYear()} {profile.name}
       </footer>

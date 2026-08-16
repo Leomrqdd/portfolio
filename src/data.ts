@@ -26,19 +26,19 @@ export interface Link {
 
 export const profile: Profile = {
   name: 'Léo Mrqd',
-  role: 'Software engineer & technical lead',
+  role: 'Software and infrastructure engineer',
 }
 
-export const KEVRED_URL = 'https://validator.kevred.com/'
+export const KEVRED_URL = 'https://www.kevred.com/'
 
 export const now: RichText[] = [
   {
-    pre: 'Running a mainnet Solana validator focused on performance, you can learn more about it ',
+    pre: 'Running a performance-focused Solana ',
     link: {
-      label: 'here',
-      href: 'https://app.jpool.one/validators/Gvt8s5Bwnhg4G27VbnT1Zkfh7Jsztq6CNvZcc5anPonS?epoch=992&activeTab=distribution',
+      label: 'validator',
+      href: 'https://app.jpool.one/validators/Gvt8s5Bwnhg4G27VbnT1Zkfh7Jsztq6CNvZcc5anPonS',
     },
-    post: '.',
+    post: ' on mainnet.',
   },
   {
     pre: '',
@@ -46,12 +46,20 @@ export const now: RichText[] = [
     post: ' Ambassador.',
   },
   {
-    pre: 'Active in the ',
+    pre: 'Member of the ',
+    link: { label: 'Vault', href: 'https://thevault.finance/' },
+    post: ' Validator Board.',
+  },
+  {
+    pre: 'Helping with events and projects in the ',
     link: { label: 'Ferno', href: 'https://ferno.ag/' },
     post: ' community.',
   },
+]
+
+export const availability: RichText[] = [
   'Based in France. Remote-friendly, but ready to move or travel for work.',
-  'Open for jobs, feel free to reach out!',
+  'Open to backend and infrastructure roles. Feel free to reach out.',
 ]
 
 export const work: WorkItem[] = [
@@ -60,7 +68,7 @@ export const work: WorkItem[] = [
     name: 'Kevred Load-Balancer',
     description:
       'An RPC load-balancer for Solana that reduces latency and improves reliability for devs and users. Based on Cloudflare Workers, written in TypeScript, and open-source.',
-    href: 'https://www.kevred.com/',
+    href: 'https://github.com/kevredlabs/kevred-rpc',
   },
   {
     period: '2026',
@@ -69,18 +77,38 @@ export const work: WorkItem[] = [
       'An agent that summarizes Solana X news into Telegram.',
       'A DeFi agent optimized for high-frequency trading, fully built in Rust.',
     ],
+    href: 'https://t.me/kevred_sol_news',
   },
   {
     period: '2025',
     name: 'Roshambo',
     description:
-      'A Solana Mobile dApp: on-chain Rock-Paper-Scissors where players bet SOL in a trustless, winner-takes-all game. Live on the dApp Store. Built for fun, as an educational project.',
+      'A Solana Mobile dApp: on-chain Rock-Paper-Scissors where players bet SOL in a trustless, winner-takes-all game. Live on the Seeker dApp Store with more than 30 reviews.',
     href: 'https://roshambo.kevred.com/',
   },
   {
     period: '2025',
     name: 'Onchain Lottery',
     description: 'An on-chain lottery on Solana, using VRF for verifiable on-chain randomness.',
+    href: 'https://github.com/Leomrqdd/lottery-ackee',
+  },
+]
+
+export const background: RichText[] = [
+  {
+    pre: '',
+    link: { label: 'School of Solana', href: 'https://ackee.xyz/school-of-solana' },
+    post: ' (Ackee).',
+  },
+  {
+    pre: '',
+    link: { label: 'Turbin3 Builders', href: 'https://turbin3.org/institute' },
+    post: '.',
+  },
+  {
+    pre: '',
+    link: { label: 'Rektoff Rust Security Bootcamp', href: 'https://www.rektoff.xyz/bootcamp' },
+    post: '.',
   },
 ]
 
