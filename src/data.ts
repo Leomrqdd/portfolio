@@ -40,11 +40,7 @@ export const now: RichText[] = [
     },
     post: ' on mainnet.',
   },
-  {
-    pre: '',
-    link: { label: 'DoubleZero', href: 'https://doublezero.xyz/' },
-    post: ' Ambassador.',
-  },
+  'Open-source contributions to Circular, Triton, Agave, and LimeChain.',
   {
     pre: 'Member of the ',
     link: { label: 'Vault', href: 'https://thevault.finance/' },
@@ -110,6 +106,7 @@ export const background: RichText[] = [
     link: { label: 'Rektoff Rust Security Bootcamp', href: 'https://www.rektoff.xyz/bootcamp' },
     post: '.',
   },
+  'Trained as a generalist engineer in France.',
 ]
 
 export const socials: Link[] = [
