@@ -8,12 +8,19 @@ export type RichText =
   | string
   | { pre: string; link: { label: string; href: string }; post: string }
 
+export interface WorkProject {
+  name: string
+  description?: string | string[]
+  href?: string
+}
+
 export interface WorkItem {
   period: string
   name: string
   /** A single paragraph, or several bulleted lines. */
-  description: string | string[]
+  description?: string | string[]
   href?: string
+  projects?: WorkProject[]
 }
 
 export interface Link {
@@ -24,6 +31,10 @@ export interface Link {
 
 export interface PortfolioContent {
   profile: Profile
+  /** Filename under public/. */
+  avatar: string
+  /** Pixel-art rendering; off for a real photo. */
+  pixelated?: boolean
   intro: RichText[]
   now: RichText[]
   availability: RichText[]

@@ -9,5 +9,14 @@ function resolveVariant(value: string | undefined): Variant {
 const variant = resolveVariant(import.meta.env.VITE_VARIANT)
 const content: PortfolioContent = variant === 'general' ? general : web3
 
-export const { profile, intro, now, availability, work, background, socials } = content
-export type { Link, PortfolioContent, Profile, RichText, Variant, WorkItem } from './types'
+export const { profile, avatar, pixelated, intro, now, availability, work, background, socials } =
+  content
+export type {
+  Link,
+  PortfolioContent,
+  Profile,
+  RichText,
+  Variant,
+  WorkItem,
+  WorkProject,
+} from './types'

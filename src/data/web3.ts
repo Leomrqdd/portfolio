@@ -5,6 +5,8 @@ export const content = {
     name: 'Léo Mrqd',
     role: 'Software and infrastructure engineer',
   },
+  avatar: 'monkey_pfp.png',
+  pixelated: true,
 
   intro: [
     {

@@ -1,5 +1,7 @@
 import {
   profile,
+  avatar,
+  pixelated,
   intro,
   now,
   availability,
@@ -7,11 +9,15 @@ import {
   background,
   socials,
   type RichText,
+  type WorkItem,
+  type WorkProject,
 } from './data'
 import { Section } from './components/Section'
 
 const linkClass =
   'text-ink underline decoration-line underline-offset-4 transition-colors hover:decoration-ink'
+
+const showNow = now.length > 0 || availability.length > 0
 
 /** Renders plain text, or text with one inline link. */
 function Rich({ value }: { value: RichText }) {
@@ -25,6 +31,45 @@ function Rich({ value }: { value: RichText }) {
       {value.post}
     </>
   )
+}
+
+function Description({ value }: { value: string | string[] }) {
+  if (Array.isArray(value)) {
+    return (
+      <ul className="mt-1 space-y-0.5 text-muted">
+        {value.map((d) => (
+          <li key={d} className="flex gap-2">
+            <span aria-hidden="true">•</span>
+            <span>{d}</span>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+  return <p className="mt-1 text-muted">{value}</p>
+}
+
+function ProjectName({
+  item,
+  nested = false,
+}: {
+  item: Pick<WorkItem | WorkProject, 'name' | 'href'>
+  nested?: boolean
+}) {
+  const nameClass = nested ? 'text-sm font-normal' : 'font-medium'
+  if (item.href) {
+    return (
+      <a
+        href={item.href}
+        target="_blank"
+        rel="noreferrer"
+        className={`${nameClass} ${linkClass}`}
+      >
+        {item.name}
+      </a>
+    )
+  }
+  return <span className={`${nameClass} text-ink`}>{item.name}</span>
 }
 
 function App() {
@@ -46,64 +91,58 @@ function App() {
       </header>
 
       <div className="space-y-12">
-        <Section title="Now" delay={80}>
-          <div className="space-y-6">
-            <ul className="space-y-2">
-              {now.map((item) => (
-                <li
-                  key={typeof item === 'string' ? item : item.link.label}
-                  className="text-ink/90"
-                >
-                  <Rich value={item} />
-                </li>
-              ))}
-            </ul>
-            <ul className="space-y-2">
-              {availability.map((item) => (
-                <li
-                  key={typeof item === 'string' ? item : item.link.label}
-                  className="text-ink/90"
-                >
-                  <Rich value={item} />
-                </li>
-              ))}
-            </ul>
-          </div>
-        </Section>
+        {showNow && (
+          <Section title="Now" delay={80}>
+            <div className="space-y-6">
+              {now.length > 0 && (
+                <ul className="space-y-2">
+                  {now.map((item) => (
+                    <li
+                      key={typeof item === 'string' ? item : item.link.label}
+                      className="text-ink/90"
+                    >
+                      <Rich value={item} />
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {availability.length > 0 && (
+                <ul className="space-y-2">
+                  {availability.map((item) => (
+                    <li
+                      key={typeof item === 'string' ? item : item.link.label}
+                      className="text-ink/90"
+                    >
+                      <Rich value={item} />
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </Section>
+        )}
 
-        <Section title="Work" delay={160}>
+        <Section title="Work" delay={showNow ? 160 : 80}>
           <ul className="divide-y divide-line">
             {work.map((item) => (
               <li key={item.name} className="py-4 first:pt-0 last:pb-0">
                 <div className="flex items-baseline justify-between gap-4">
-                  {item.href ? (
-                    <a
-                      href={item.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      className={`font-medium ${linkClass}`}
-                    >
-                      {item.name}
-                    </a>
-                  ) : (
-                    <span className="font-medium text-ink">{item.name}</span>
-                  )}
+                  <ProjectName item={item} />
                   <span className="shrink-0 font-pixel text-[10px] uppercase tracking-wide text-muted">
                     {item.period}
                   </span>
                 </div>
-                {Array.isArray(item.description) ? (
-                  <ul className="mt-1 space-y-0.5 text-muted">
-                    {item.description.map((d) => (
-                      <li key={d} className="flex gap-2">
-                        <span aria-hidden="true">•</span>
-                        <span>{d}</span>
+                {item.description ? <Description value={item.description} /> : null}
+                {item.projects && item.projects.length > 0 ? (
+                  <ul className="mt-3 space-y-3">
+                    {item.projects.map((project) => (
+                      <li key={project.name}>
+                        <ProjectName item={project} nested />
+                        {project.description ? <Description value={project.description} /> : null}
                       </li>
                     ))}
                   </ul>
-                ) : (
-                  <p className="mt-1 text-muted">{item.description}</p>
-                )}
+                ) : null}
               </li>
             ))}
           </ul>
@@ -151,14 +190,16 @@ function App() {
   )
 }
 
-/** Large circular pixel-art avatar with an 8-bit hard offset shadow. */
 function Avatar() {
   return (
     <div className="group h-40 w-40 overflow-hidden rounded-full">
       <img
-        src={`${import.meta.env.BASE_URL}monkey_pfp.png`}
+        src={`${import.meta.env.BASE_URL}${avatar}`}
         alt={profile.name}
-        className="h-full w-full object-cover [image-rendering:pixelated] motion-safe:transition-transform motion-safe:duration-300 motion-safe:ease-out motion-safe:group-hover:scale-105"
+        className={[
+          'h-full w-full object-cover motion-safe:transition-transform motion-safe:duration-300 motion-safe:ease-out motion-safe:group-hover:scale-105',
+          pixelated ? '[image-rendering:pixelated]' : '',
+        ].join(' ')}
       />
     </div>
   )
