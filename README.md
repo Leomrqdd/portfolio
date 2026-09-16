@@ -18,30 +18,31 @@ Personal portfolio — front-only, single scrolling page. Software / infra dev, 
 
 ```bash
 npm install
-npm run dev      # local dev server
-npm run build    # type-check + production build to dist/
-npm run preview  # preview the production build
+npm run dev           # local dev server (web3, default)
+npm run dev:general   # local dev server (general variant)
+npm run build         # type-check + production build, web3
+npm run build:general # production build, general
+npm run preview       # preview the production build
 ```
+
+The build picks a content set via `VITE_VARIANT` (`web3` by default, or `general`). GitHub Pages sets `web3`; the Vercel subdomain sets `general`.
 
 ## Structure
 
 ```
 src/
-  data.ts            # all placeholder content, typed (profile, status, work, stack, contacts, terminal)
+  data/
+    types.ts         # shared content types
+    web3.ts          # lmrqd.xyz copy
+    general.ts       # subdomain copy
+    index.ts         # selects a variant from VITE_VARIANT
   index.css          # Tailwind import + @theme design tokens
   App.tsx            # page composition
   components/
-    Hero.tsx         # LEO title + tagline + avatar square
-    PixelRow.tsx     # row of 16 pixel squares
-    Terminal.tsx     # terminal window (static content)
-    Status.tsx       # key/value status lines + stack tags
-    Work.tsx         # 2-column project cards (1 col on mobile)
-    Contact.tsx      # contact links
-    Footer.tsx       # mono footer
     Section.tsx      # shared SectionTitle
 ```
 
-All content lives in `src/data.ts` — edit there, not in components.
+All content lives in `src/data/` — edit there, not in components.
 
 ## Status
 

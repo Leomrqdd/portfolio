@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:general": "VITE_VARIANT=general vite",
     "build": "tsc -b && vite build",
+    "build:general": "tsc -b && VITE_VARIANT=general vite build",
     "lint": "oxlint",
     "preview": "vite preview"
   },

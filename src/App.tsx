@@ -1,4 +1,13 @@
-import { profile, now, availability, work, background, socials, KEVRED_URL, type RichText } from './data'
+import {
+  profile,
+  intro,
+  now,
+  availability,
+  work,
+  background,
+  socials,
+  type RichText,
+} from './data'
 import { Section } from './components/Section'
 
 const linkClass =
@@ -28,13 +37,11 @@ function App() {
           {profile.role}
         </p>
         <div className="mt-5 max-w-prose space-y-4 text-ink/90">
-          <p>
-            Hey, I'm Léo. I co-founded{' '}
-            <a href={KEVRED_URL} target="_blank" rel="noreferrer" className={linkClass}>
-              Kevred
-            </a>
-            , where I build Solana infrastructure and software.
-          </p>
+          {intro.map((item) => (
+            <p key={typeof item === 'string' ? item : `${item.pre}${item.link.label}${item.post}`}>
+              <Rich value={item} />
+            </p>
+          ))}
         </div>
       </header>
 
